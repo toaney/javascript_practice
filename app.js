@@ -9,7 +9,7 @@ const todos = [ "take out the trash", "clean Bun Bun's cage", "prep dinner"];
 // document.addEventListener('DOMContentLoaded', populateTodo);
 
 todoButton.addEventListener('click', addTodo);
-
+todoList.addEventListener('click', deleteCheck);
 
 // Functions
 
@@ -52,4 +52,14 @@ function addTodo(event) {
 
   //clear input value
   todoInput.value = "";
+}
+
+function deleteCheck(e) {
+  console.log(e.target)
+  let item = e.target;
+  if ( item.classList[0] === "trash-btn") {
+    // alert("take out the trash")
+    const todo = item.parentElement;
+    todo.remove();
+  }
 }
