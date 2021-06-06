@@ -1,34 +1,34 @@
 // SELECTORS
-const todoInput = document.querySelector('.todo-input');
-const todoButton = document.querySelector('.todo-button');
-const todoList = document.querySelector('.todo-list');
+const todoInput = document.querySelector(".todo-input");
+const todoButton = document.querySelector(".todo-button");
+const todoList = document.querySelector(".todo-list");
 
 // EVENT LISTENERS
-todoButton.addEventListener('click', addTodo);
-todoList.addEventListener('click', deleteCheck);
+todoButton.addEventListener("click", addTodo);
+todoList.addEventListener("click", deleteCheck);
 
 // FUNCTIONS
 function addTodo(event) {
   event.preventDefault();
 
   // Todo div
-  const todoDiv = document.createElement('div');
+  const todoDiv = document.createElement("div");
   todoDiv.classList.add("todo");
 
   // Create li
-  const newTodo = document.createElement('li');
+  const newTodo = document.createElement("li");
   newTodo.innerText = todoInput.value
-  newTodo.classList.add('todo-item');
+  newTodo.classList.add("todo-item");
   todoDiv.appendChild(newTodo);
 
   // Check mark button
-  const completedButton = document.createElement('button');
+  const completedButton = document.createElement("button");
   completedButton.innerText = "complete";
   completedButton.classList.add("complete-btn");
   todoDiv.appendChild(completedButton);
   
   // Trash button
-  const trashButton = document.createElement('button');
+  const trashButton = document.createElement("button");
   trashButton.innerText = "delete";
   trashButton.classList.add("trash-btn");
   todoDiv.appendChild(trashButton);
@@ -46,12 +46,17 @@ function deleteCheck(e) {
   // Delete todo
   if ( item.classList[0] === "trash-btn") {
     const todo = item.parentElement;
-    todo.remove();
+
+    // Animation
+    todo.classList.add("fall");
+    todo.addEventListener("transitionend", function() {
+      todo.remove();
+    })
   }
 
   // Check mark/ mark complete
   if ( item.classList[0] === "complete-btn") {
     const todo = item.parentElement;
-    todo.classList.toggle('completed');
+    todo.classList.toggle("completed");
   }
 }
